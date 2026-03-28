@@ -1,0 +1,5 @@
+{
+  "name": "VisionFlow AI Automator",
+  "description": "Automated image generation, background removal, upscaling, and optimization pipeline using Gemini AI.",
+  "requestFramePermissions": []
+}
