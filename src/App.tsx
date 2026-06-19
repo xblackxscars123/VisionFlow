@@ -81,6 +81,13 @@ export default function App() {
   const onDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (file) {
+      // Security: File size limit (10MB) to prevent client-side DoS
+      const MAX_FILE_SIZE = 10 * 1024 * 1024;
+      if (file.size > MAX_FILE_SIZE) {
+        setError("File size exceeds the 10MB limit. Please choose a smaller file.");
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         setImages(prev => ({ ...prev, original: reader.result as string }));
@@ -152,6 +159,11 @@ export default function App() {
 
   const runPipeline = async () => {
     try {
+      // Security: Input validation
+      if (prompt && prompt.length > 2000) {
+        throw new Error("Prompt is too long (maximum 2000 characters).");
+      }
+
       setIsProcessing(true);
       setError(null);
       setStep('processing');
@@ -195,7 +207,9 @@ export default function App() {
         origin: { y: 0.6 }
       });
     } catch (err: any) {
-      console.error(err);
+      // Security: Log the full error internally, but display generic messages to user
+      console.error('Pipeline processing error:', err);
+
       const errorMessage = err.message || "An error occurred during processing";
       
       // If we get a 403 or "not found" error, it might be related to the API key
@@ -203,8 +217,11 @@ export default function App() {
         setHasKey(false);
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
-      } else {
+      } else if (errorMessage.includes("Prompt is too long")) {
         setError(errorMessage);
+      } else {
+        // Fallback to a generic error message so we don't leak stack traces or internal API details
+        setError("An unexpected error occurred during processing. Please try again.");
       }
       
       setStep('input');
@@ -314,6 +331,7 @@ export default function App() {
                 </h2>
                 <textarea
                   value={prompt}
+                  maxLength={2000}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
