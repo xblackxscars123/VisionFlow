@@ -1,0 +1,4 @@
+## 2024-05-15 - Missing Client-Side Input Validation and Error Leakage
+**Vulnerability:** User inputs (file uploads and prompts) were not being validated for size or type before being loaded into browser memory or sent to the API. Error messages from the API were also being directly displayed to the user.
+**Learning:** Client-side React applications interacting with AI APIs need strict boundaries to prevent browser DoS (large files) and prompt injection/API abuse (excessive text). Error messages must be generic to prevent leaking API internals.
+**Prevention:** Implement strict file size (e.g., 5MB limit) and type checking (`image/*`) during drag-and-drop. Add `maxLength` constraints to all text inputs. Catch errors and display generic "Operation failed" messages instead of `err.message`, except for expected authentication errors.
