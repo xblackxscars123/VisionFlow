@@ -356,7 +356,7 @@ export default function App() {
               {/* Upload Input */}
               <div 
                 {...getRootProps()} 
-                className={`p-8 rounded-3xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
+                className={`group p-8 rounded-3xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center text-center focus-visible:outline-none focus-visible:border-orange-500 focus-visible:bg-white/10 ${
                   isDragActive ? 'border-orange-500 bg-orange-500/5' : 'border-white/10 bg-white/5 hover:bg-white/10'
                 }`}
               >
@@ -364,7 +364,7 @@ export default function App() {
                 {images.original ? (
                   <div className="relative w-full aspect-square rounded-xl overflow-hidden">
                     <img src={images.original} alt="Original" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
                       <p className="text-sm font-medium">Click to replace</p>
                     </div>
                   </div>
@@ -429,16 +429,17 @@ export default function App() {
                     <CheckCircle2 className="w-4 h-4 text-green-400" />
                     Final Optimized Asset
                   </h3>
-                  <div className="relative aspect-square rounded-3xl bg-white/5 border border-white/10 overflow-hidden group">
+                  <div className="relative aspect-square rounded-3xl bg-white/5 border border-white/10 overflow-hidden group focus-within:ring-2 focus-within:ring-orange-500/50">
                     <img 
                       src={images.final!} 
                       alt="Final" 
                       className="w-full h-full object-contain p-8"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
                         onClick={downloadImage}
-                        className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download final image"
+                        className="p-4 rounded-full bg-white text-black hover:scale-110 focus-visible:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 transition-transform"
                       >
                         <Download className="w-6 h-6" />
                       </button>
