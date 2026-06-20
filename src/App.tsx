@@ -81,6 +81,18 @@ export default function App() {
   const onDrop = (acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (file) {
+      // Security: Validate file type and size to prevent DoS or arbitrary file reading
+      if (!file.type.startsWith('image/')) {
+        setError('Invalid file type. Please upload an image.');
+        return;
+      }
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+      if (file.size > MAX_FILE_SIZE) {
+        setError('File size exceeds 5MB limit.');
+        return;
+      }
+
+      setError(null);
       const reader = new FileReader();
       reader.onload = () => {
         setImages(prev => ({ ...prev, original: reader.result as string }));
@@ -195,8 +207,8 @@ export default function App() {
         origin: { y: 0.6 }
       });
     } catch (err: any) {
-      console.error(err);
-      const errorMessage = err.message || "An error occurred during processing";
+      console.error('Operation failed', err);
+      const errorMessage = err.message || "";
       
       // If we get a 403 or "not found" error, it might be related to the API key
       if (errorMessage.includes("403") || errorMessage.includes("not found")) {
@@ -204,7 +216,8 @@ export default function App() {
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
       } else {
-        setError(errorMessage);
+        // Security: Don't leak exact error details to the UI
+        setError("An error occurred during processing. Please try again.");
       }
       
       setStep('input');
@@ -316,6 +329,7 @@ export default function App() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
+                  maxLength={1000} // Security: Limit prompt length to prevent excessive API load
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
                 />
                 <button
