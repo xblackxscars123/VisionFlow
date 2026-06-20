@@ -1,0 +1,3 @@
+## 2024-05-15 - Hidden hover overlays block keyboard users
+**Learning:** Actions placed inside overlays that only appear on hover (`hover:opacity-100` and `opacity-0`) are completely hidden to keyboard users. Even if the buttons are technically focusable in the DOM, the user cannot see them when they tab to them.
+**Action:** When using hidden overlays for image actions (like a "Download" button over an image), always ensure the overlay container uses `focus-within:opacity-100` (or `group-focus-visible:opacity-100` if the container itself is focusable, like a dropzone) so the overlay becomes visible when its contents or the container receives keyboard focus.
