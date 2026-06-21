@@ -1,0 +1,4 @@
+## 2025-03-09 - [Prevent Error Information Leakage]
+**Vulnerability:** The application was catching raw errors thrown from the API layer and exposing `err.message` directly into the UI state (`setError(errorMessage)`). This could inadvertently expose sensitive information like stack traces, internal endpoints, or API keys directly to end users.
+**Learning:** Developers often pipe generic error messages directly to the UI during prototyping to aid in debugging, but this creates a medium severity security issue because error message payloads from downstream dependencies might contain sensitive environment context.
+**Prevention:** Instead of reflecting `err.message` verbatim in user-facing components, explicitly catch expected errors (like API authorization failures), log the raw error securely on the server or console, and return a sanitized, generic fallback error message to the user UI.
