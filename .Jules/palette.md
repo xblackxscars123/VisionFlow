@@ -1,0 +1,1 @@
+## 2024-05-15 - Missing Keyboard Focus on Hover Actions\n**Learning:** Interactive elements hidden behind `group-hover:opacity-100` are invisible to keyboard users unless `focus-within:opacity-100` is also applied to the parent container.\n**Action:** Always pair `group-hover:opacity-100` with `focus-within:opacity-100` when the container holds interactive elements like buttons.
