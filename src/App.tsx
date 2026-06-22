@@ -204,7 +204,8 @@ export default function App() {
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
       } else {
-        setError(errorMessage);
+        // SECURITY: Do not expose raw API error messages to the UI to prevent information leakage
+        setError("An error occurred during processing. Please try again later.");
       }
       
       setStep('input');
