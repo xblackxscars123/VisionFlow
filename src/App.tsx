@@ -89,11 +89,17 @@ export default function App() {
     }
   };
 
+  const onDropRejected = () => {
+    setError("File is too large. Please upload an image under 5MB.");
+  };
+
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
-    onDrop, 
+    onDrop,
+    onDropRejected,
     accept: { 'image/*': [] },
-    multiple: false 
+    multiple: false,
+    maxSize: 5242880 // 5MB limit
   });
 
   const autoCrop = (base64: string): Promise<string> => {
@@ -195,16 +201,18 @@ export default function App() {
         origin: { y: 0.6 }
       });
     } catch (err: any) {
-      console.error(err);
-      const errorMessage = err.message || "An error occurred during processing";
+      console.error("Pipeline error details:", err);
+      const errorMessage = err?.message || "";
       
       // If we get a 403 or "not found" error, it might be related to the API key
       if (errorMessage.includes("403") || errorMessage.includes("not found")) {
         setHasKey(false);
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
+      } else if (errorMessage.includes("No API key found")) {
+        setError("Please select an API key to continue.");
       } else {
-        setError(errorMessage);
+        setError("An error occurred during processing. Please try again.");
       }
       
       setStep('input');
@@ -316,6 +324,7 @@ export default function App() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
+                  maxLength={1000}
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
                 />
                 <button
