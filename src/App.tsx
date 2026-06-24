@@ -84,16 +84,30 @@ export default function App() {
       const reader = new FileReader();
       reader.onload = () => {
         setImages(prev => ({ ...prev, original: reader.result as string }));
+        setError(null);
       };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const onDropRejected = (fileRejections: any[]) => {
+    if (fileRejections.length > 0) {
+      const error = fileRejections[0].errors[0];
+      if (error.code === 'file-too-large') {
+        setError('File is larger than 5MB. Please upload a smaller image.');
+      } else {
+        setError('Invalid file type or error uploading file.');
+      }
     }
   };
 
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
+    onDropRejected,
     accept: { 'image/*': [] },
-    multiple: false 
+    multiple: false,
+    maxSize: 5242880 // 5MB limit
   });
 
   const autoCrop = (base64: string): Promise<string> => {
@@ -204,7 +218,8 @@ export default function App() {
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
       } else {
-        setError(errorMessage);
+        // SECURITY: Do not leak raw error details (like stack traces or internal paths) to the user
+        setError("An unexpected error occurred during processing. Please try again.");
       }
       
       setStep('input');
@@ -315,6 +330,7 @@ export default function App() {
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
+                  maxLength={1000}
                   placeholder="Describe the image you want to find and process..."
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
                 />
