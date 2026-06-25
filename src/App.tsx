@@ -89,10 +89,26 @@ export default function App() {
     }
   };
 
+  // 🛡️ Security: Validate dropped files to prevent XSS (SVG) and large file uploads (DoS).
+  const onDropRejected = (fileRejections: any[]) => {
+    const rejection = fileRejections[0];
+    if (rejection.errors[0].code === 'file-too-large') {
+      setError("File is too large. Maximum size is 10MB.");
+    } else {
+      setError("Invalid file type. Please upload a JPEG, PNG, or WebP image.");
+    }
+  };
+
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    onDropRejected,
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': []
+    },
+    maxSize: 10485760, // 10MB limit
     multiple: false 
   });
 
@@ -312,10 +328,12 @@ export default function App() {
                   <Zap className="w-5 h-5 text-orange-400" />
                   Generate from Prompt
                 </h2>
+                {/* 🛡️ Security: Add maxLength to prevent excessively long prompt strings that could cause performance issues */}
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
+                  maxLength={2000}
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
                 />
                 <button
