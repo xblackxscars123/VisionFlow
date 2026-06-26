@@ -1,0 +1,3 @@
+## 2026-06-26 - Missing Keyboard Accessibility on Hover-revealed Elements
+**Learning:** In this React/Tailwind application, interactive elements hidden behind a `group-hover:opacity-100` class are inaccessible to keyboard users unless explicitly paired with `group-focus-within:opacity-100` on the parent container. Even if the button receives focus, it remains invisible if only `group-hover` is used.
+**Action:** Always ensure that UI components relying on hover states to reveal interactive actions (like icon buttons on image overlays) also include `group-focus-within:opacity-100` on the parent and visible focus rings (`focus-visible:ring`) on the button itself.
