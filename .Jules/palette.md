@@ -1,0 +1,3 @@
+## 2024-05-14 - Keyboard Accessibility with Hover Utilities
+**Learning:** Using Tailwind's `group-hover:opacity-100` utility to reveal interactive elements (like an overlay with a Download button over an image) makes them inaccessible to keyboard users because the elements remain invisible `opacity-0` when navigating via Tab.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures that when an inner element receives keyboard focus, the parent container's opacity is brought to `100`, making the interactive element visible to keyboard users. Additionally, add `focus-visible` ring styling to the inner elements so the focus indicator is clear.
