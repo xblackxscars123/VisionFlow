@@ -1,0 +1,3 @@
+## 2026-07-01 - Interactive Hover Overlays Need Focus Within
+**Learning:** When using Tailwind's `group-hover:opacity-100` to reveal interactive elements (like a download button appearing over an image), the elements inside become inaccessible via keyboard navigation because they remain visually hidden or lack a visible focus state when tabbed to.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures that when an interactive element inside the container receives focus, the entire overlay becomes visible, making the interface accessible for keyboard users.
