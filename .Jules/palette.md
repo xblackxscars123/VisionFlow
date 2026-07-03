@@ -1,0 +1,3 @@
+## 2024-05-18 - [Ensure keyboard accessibility for hover reveals]
+**Learning:** When using Tailwind hover states (like `group-hover:opacity-100`) to reveal interactive elements (like a download button), keyboard users cannot access them without pairing it with a focus state on the parent container (like `group-focus-within:opacity-100`) so that it becomes visible and interactive during tab navigation. Additionally, focusable interactive icons need ARIA labels and visible focus indicators.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. Ensure focus states (`focus-visible:ring-2`) and ARIA labels are added to icon-only buttons.
