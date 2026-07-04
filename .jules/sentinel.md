@@ -1,0 +1,4 @@
+## 2024-05-24 - SVG-based XSS via File Upload & DoS via Long Inputs
+**Vulnerability:** The application used a generic `image/*` wildcard in `react-dropzone` which implicitly allowed uploading `.svg` files that could contain malicious JavaScript (XSS). Additionally, the prompt textarea lacked a `maxLength` restriction, allowing arbitrarily long text inputs which could cause performance degradation and potentially DoS the application or the backend AI API.
+**Learning:** Generic file type wildcards in frontend libraries are dangerous. React Dropzone and similar components must be configured securely. Also, all user inputs, including text areas used for AI prompts, must have explicit length bounds to prevent resource exhaustion.
+**Prevention:** Explicitly specify safe MIME types like `image/jpeg`, `image/png`, and `image/webp` instead of generic wildcards. Always set sensible `maxLength` limits on text inputs based on the expected use case.
