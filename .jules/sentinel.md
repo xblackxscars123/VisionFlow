@@ -1,0 +1,4 @@
+## 2025-03-05 - SVG-based XSS in Image Uploads and DoS in Text Inputs
+**Vulnerability:** The `react-dropzone` implementation accepted `'image/*'`, which inadvertently allows `.svg` files. SVGs can contain embedded JavaScript (XSS). Additionally, the prompt `textarea` lacked a `maxLength` attribute, potentially allowing a DoS attack through excessively large inputs.
+**Learning:** Generic MIME type wildcards like `image/*` are dangerous because they include executable image formats like SVG. Also, unbounded text inputs can cause performance issues or denial of service when processed.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `'image/jpeg'`, `'image/png'`, `'image/webp'`) for image uploads instead of using generic wildcards. Always set `maxLength` attributes on user text inputs to bound potential payload sizes.
