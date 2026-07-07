@@ -1,0 +1,3 @@
+## 2024-05-18 - Missing keyboard focus within hover groups
+**Learning:** In the VisionFlow image generation result grid, the download button container used `opacity-0 group-hover:opacity-100` to hide interactive elements until hovered. This pattern makes it impossible for keyboard-only users to see the interactive elements they have tabbed to because the parent container remains visually hidden (opacity-0).
+**Action:** When using Tailwind hover states to reveal interactive elements within a parent group, always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures the entire interactive block becomes visible whenever an element inside it receives keyboard focus.
