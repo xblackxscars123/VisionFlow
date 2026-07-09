@@ -1,0 +1,3 @@
+## 2024-07-09 - Keyboard Visibility in Tailwind Hover Groups
+**Learning:** When using Tailwind's `group-hover` utility to reveal elements like buttons inside an image overlay, the interactive elements remain invisible to keyboard-only users who navigate via the Tab key, creating an accessibility trap.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container, and add explicit focus styles (e.g., `focus-visible:ring`) to the interactive element itself so it can be effectively used without a mouse. Also ensure icon-only buttons receive an `aria-label`.
