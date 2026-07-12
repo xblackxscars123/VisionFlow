@@ -308,11 +308,12 @@ export default function App() {
             >
               {/* Generation Input */}
               <div className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-xl">
-                <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <label htmlFor="prompt-input" className="text-xl font-semibold mb-4 flex items-center gap-2 cursor-pointer w-fit">
                   <Zap className="w-5 h-5 text-orange-400" />
                   Generate from Prompt
-                </h2>
+                </label>
                 <textarea
+                  id="prompt-input"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
@@ -432,13 +433,15 @@ export default function App() {
                   <div className="relative aspect-square rounded-3xl bg-white/5 border border-white/10 overflow-hidden group">
                     <img 
                       src={images.final!} 
-                      alt="Final" 
+                      alt="Final optimized image"
                       className="w-full h-full object-contain p-8"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
                         onClick={downloadImage}
-                        className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download image"
+                        title="Download image"
+                        className="p-4 rounded-full bg-white text-black hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-500 transition-transform"
                       >
                         <Download className="w-6 h-6" />
                       </button>
