@@ -1,0 +1,4 @@
+## 2025-03-09 - [Fix SVG-based XSS and DoS vulnerabilities in inputs]
+**Vulnerability:** Found two vulnerabilities in `src/App.tsx`: 1) `useDropzone` was configured to accept `image/*`, which includes SVGs, opening the application to SVG-based Cross-Site Scripting (XSS) attacks. 2) The `<textarea>` input lacked a `maxLength` property, which could allow a malicious actor to paste huge amounts of text, causing UI performance degradation or a Denial of Service (DoS) vulnerability.
+**Learning:** React component libraries often default to generic configurations (like `image/*` or unbound inputs) which can be risky in production. Explicit allowlists and bound limits are crucial for secure by default components.
+**Prevention:** Always explicitly allowlist MIME types for file uploads rather than using wildcards. Always add `maxLength` properties to user text inputs.
