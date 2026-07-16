@@ -1,0 +1,3 @@
+## 2025-03-08 - Accessible Hover Overlays
+**Learning:** When using Tailwind's hover states (like `group-hover:opacity-100`) to reveal interactive elements (e.g. image download buttons inside an overlay), it is critical to also include `group-focus-within:opacity-100` on the parent container. Otherwise, the elements are completely invisible when focused via keyboard navigation, breaking accessibility.
+**Action:** Always pair `group-hover` visibility classes with `group-focus-within` on parent containers that hide interactive elements. Ensure the inner elements have proper `focus-visible` styling (like `focus-visible:ring-2`) and ARIA labels.
