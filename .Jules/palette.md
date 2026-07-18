@@ -1,0 +1,3 @@
+## 2024-05-15 - Interactive Overlay Keyboard Accessibility
+**Learning:** In the VisionFlow result grid, interactive elements (like the download button) inside image overlays were only visible on `group-hover`. This meant keyboard users navigating via Tab could focus the button but wouldn't see it because the overlay remained transparent (`opacity-0`).
+**Action:** When using Tailwind's hover states (`group-hover:opacity-100`) to reveal interactive elements inside containers, always pair it with `group-focus-within:opacity-100` on the parent container to ensure the overlay and its buttons become visible when accessed via keyboard navigation.
