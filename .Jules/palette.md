@@ -1,0 +1,3 @@
+## 2024-07-22 - Pairing hover states with focus-within for accessible overlays
+**Learning:** When using Tailwind's `group-hover` to display interactive elements (like a download overlay over an image), those elements are completely inaccessible to keyboard users unless explicitly handled. Without focus management on the parent, users tabbing through the page will invisibly focus the button without seeing it.
+**Action:** Always pair `group-hover:opacity-100` on the parent container with `group-focus-within:opacity-100`. Furthermore, ensure the child interactive elements have clear focus states (`focus-visible:ring`, `focus-visible:scale`) and explicit `aria-label` attributes if they are icon-only.
