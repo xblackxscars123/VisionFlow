@@ -1,0 +1,4 @@
+## 2026-07-23 - Prevent SVG-based XSS and Text Input DoS
+**Vulnerability:** The `react-dropzone` file upload configuration used a wildcard `image/*` which could potentially allow users to upload SVG files containing malicious scripts, leading to Cross-Site Scripting (XSS). Additionally, the main prompt `<textarea>` had no character limit, making it susceptible to Denial of Service (DoS) attacks and performance degradation via excessively large inputs.
+**Learning:** Generic MIME types and unbounded text inputs present significant security risks. It's crucial to adopt a deny-by-default and allowlist-only approach for user inputs.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on generic wildcards like `image/*`. Furthermore, always ensure text inputs have `maxLength` limits defined in React components.
