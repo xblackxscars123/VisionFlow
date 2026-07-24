@@ -1,0 +1,3 @@
+## 2024-05-18 - Hidden Interactive Elements
+**Learning:** In this application, image interaction overlays are hidden by default using `opacity-0` and revealed on hover (`group-hover:opacity-100`). This makes the inner interactive elements (like the download button) inaccessible to keyboard users unless they are also revealed on focus.
+**Action:** When using Tailwind's hover states (like `group-hover:opacity-100`) to reveal interactive elements, always pair it with `group-focus-within:opacity-100` on the parent container. Additionally, ensure the nested interactive elements have proper `focus-visible` styles and `aria-label`s for icon-only buttons.
