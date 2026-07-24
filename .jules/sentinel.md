@@ -1,0 +1,4 @@
+## 2026-07-24 - [Fix File Upload XSS and Input DoS]
+**Vulnerability:** The `react-dropzone` implementation accepted any image type (`image/*`), which allows potentially dangerous SVG uploads that can contain XSS payloads. Additionally, the prompt textarea lacked a `maxLength` restriction, exposing the application to Denial of Service (DoS) attacks via excessively large inputs.
+**Learning:** Using generic wildcards for file uploads is risky, and unrestricted text inputs can cause performance degradation.
+**Prevention:** Explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) for file uploads and enforce `maxLength` limits on all text inputs.
