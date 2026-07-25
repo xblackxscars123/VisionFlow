@@ -1,0 +1,3 @@
+## 2024-05-18 - Ensure keyboard accessibility in hover-revealed overlays
+**Learning:** Using `group-hover:opacity-100` to reveal interactive elements (like buttons) inside image overlays hides them from keyboard-only users who navigate using "Tab". Screen readers might find them, but visually, the user won't know where focus went if the overlay remains hidden.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures that when an interactive element inside the overlay receives focus, the overlay becomes visible. Also, remember to add `focus-visible` outline or ring styles so the focused element is clearly identifiable.
