@@ -1,0 +1,3 @@
+## 2024-07-26 - Interactive Elements in Hover Overlays
+**Learning:** When using Tailwind's hover states (like `group-hover:opacity-100`) to reveal interactive elements such as download buttons in an image overlay, those elements become inaccessible to keyboard users because hover cannot be triggered via keyboard.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures that when a keyboard user tabs to an interactive element inside the overlay, the container becomes visible. Also, always add appropriate `aria-label` and visual focus indicators (e.g. `focus-visible:ring-4 focus:outline-none`) to the interactive elements themselves.
