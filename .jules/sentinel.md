@@ -1,0 +1,4 @@
+## 2024-07-26 - SVG XSS in generic image uploads and DoS in unlimited text inputs
+**Vulnerability:** The application used `accept: { 'image/*': [] }` in `useDropzone`, allowing malicious SVG uploads which can lead to Stored Cross-Site Scripting (XSS). Additionally, the `<textarea>` for prompt inputs had no `maxLength`, creating a risk for Denial of Service (DoS) and application performance degradation from processing enormous strings.
+**Learning:** Generic wildcards like `image/*` in file upload libraries do not inherently filter out dangerous types like SVGs, which can embed scripts. Text inputs without length constraints are an easy vector for performance abuse.
+**Prevention:** Always explicitly allowlist safe MIME types (`image/jpeg`, `image/png`, `image/webp`) instead of relying on generic wildcards to prevent SVG-based XSS attacks. Always ensure text inputs have `maxLength` limits to mitigate performance degradation and DoS vulnerabilities.
