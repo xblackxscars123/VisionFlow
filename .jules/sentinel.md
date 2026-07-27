@@ -1,0 +1,4 @@
+## 2024-05-24 - [SVG-based XSS in react-dropzone]
+**Vulnerability:** Found a configuration in `react-dropzone` using generic MIME type wildcard `accept: { 'image/*': [] }`. This allows malicious users to upload SVG files containing executable scripts, leading to Cross-Site Scripting (XSS).
+**Learning:** Using generic wildcards for file uploads is a dangerous pattern, especially for image uploads where SVG (which can execute JavaScript) is often included in the `image/*` category by browsers.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `'image/jpeg'`, `'image/png'`, `'image/webp'`) when configuring file upload components to prevent unintended malicious file types.
