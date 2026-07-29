@@ -1,0 +1,3 @@
+## 2025-03-05 - Invisible Interactive Elements in Hover Overlays
+**Learning:** When interactive elements (like buttons) are placed inside a container that only appears on hover (using Tailwind's `group-hover:opacity-100`), they become inaccessible to keyboard users because the container remains invisible (opacity 0) when the button receives focus. This causes users to tab to elements they cannot see.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. Ensure the interactive elements themselves have clear `focus-visible` styling (e.g., `focus-visible:ring-4`) and appropriate `aria-label` attributes if they are icon-only.
