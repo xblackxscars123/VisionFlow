@@ -1,0 +1,3 @@
+## 2024-05-30 - Keyboard Accessibility for Hover States in Tailwind v4
+**Learning:** When using Tailwind's `group-hover:opacity-100` to reveal interactive elements (like the download button overlay in the image results), it completely hides the element from keyboard users navigating with Tab.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container to ensure interactive elements remain visible and accessible via keyboard navigation. Additionally, apply `focus-visible:ring-*` to the actual interactive element for clear focus indication.
