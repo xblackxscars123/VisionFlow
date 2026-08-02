@@ -1,0 +1,3 @@
+## 2024-08-02 - Keyboard Accessible Reveal Interactions
+**Learning:** When using Tailwind's hover states (like `group-hover:opacity-100`) to reveal interactive elements (like icon-only download buttons) within a parent container, these elements remain invisible to keyboard-only users who navigate via the Tab key, causing serious accessibility issues. Additionally, icon-only buttons without explicit labels fail screen reader tests.
+**Action:** Always pair `group-hover` with `group-focus-within` on the parent container to ensure the interactive elements become visible and accessible when they receive keyboard focus. Additionally, always add explicit `aria-label` and `title` attributes, as well as `focus-visible` styling, to icon-only buttons.
