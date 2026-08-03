@@ -90,9 +90,10 @@ export default function App() {
   };
 
   // @ts-ignore - Type mismatch in environment
+  // SECURITY: Explicitly allowlist safe MIME types to prevent SVG-based XSS attacks via file upload.
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    accept: { 'image/jpeg': [], 'image/png': [], 'image/webp': [] },
     multiple: false 
   });
 
@@ -313,6 +314,8 @@ export default function App() {
                   Generate from Prompt
                 </h2>
                 <textarea
+                  // SECURITY: Limit input length to prevent DoS vulnerabilities from excessively long prompts.
+                  maxLength={1000}
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
