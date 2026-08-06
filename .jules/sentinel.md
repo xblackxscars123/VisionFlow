@@ -1,0 +1,4 @@
+## 2024-05-18 - XSS and DoS Prevention in Image Processing Input
+**Vulnerability:** The application was susceptible to SVG-based XSS attacks via file uploads accepting `'image/*'`, which includes `image/svg+xml`. SVGs can contain executable JavaScript. Additionally, the text prompt input lacked a `maxLength` constraint, opening up a potential denial-of-service (DoS) or performance degradation issue from extremely large payloads.
+**Learning:** Generic wildcard MIME types (`image/*`) in file upload libraries like `react-dropzone` are overly permissive and dangerous in a security context. Text input lengths must always be constrained before being passed to LLM APIs or state.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `'image/jpeg', 'image/png', 'image/webp'`) when handling file uploads. Always set `maxLength` limits on client-side text inputs that process state or API calls.
