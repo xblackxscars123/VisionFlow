@@ -1,0 +1,4 @@
+## 2025-02-28 - SVG XSS and Input DoS in Frontend Forms
+**Vulnerability:** `react-dropzone` accepted all image types (`image/*`), including SVGs which can execute XSS payloads. Additionally, the prompt textarea lacked a maximum length limit, potentially allowing users to paste massively long strings causing browser performance degradation or DoS.
+**Learning:** Generic wildcards like `image/*` should not be trusted for file uploads in web applications due to SVG risks. Inputs that are processed by state or APIs should have sensible length limits to protect the client and backend.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on wildcards. Always ensure text inputs have `maxLength` limits enforced on the client side.
