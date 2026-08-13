@@ -1,0 +1,3 @@
+## 2023-10-27 - [Hidden Interactive Elements Need Focus Management]
+**Learning:** When hiding interactive elements behind a hover state using `group-hover:opacity-100` (e.g., on image overlays), keyboard users cannot access them unless the parent container also responds to focus within. The download button on the image result was previously inaccessible via keyboard.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container, and add `focus-visible` styles to the child button to ensure the interaction remains visible and accessible during keyboard navigation. Add an `aria-label` when using icon-only buttons.
