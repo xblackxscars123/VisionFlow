@@ -1,0 +1,4 @@
+## 2025-02-28 - SVG-based XSS via Dropzone & Unbounded Textarea DoS
+**Vulnerability:** The application used a wildcard MIME type `image/*` for file uploads in `react-dropzone` and lacked `maxLength` constraints on a `textarea` for prompt generation.
+**Learning:** `image/*` inherently allows `image/svg+xml`, which can embed JavaScript leading to XSS if the SVG is ever viewed natively or mishandled. Furthermore, missing `maxLength` on a generation text prompt can result in unbounded data being sent to expensive backend processes or causing frontend performance degradation (DoS risk).
+**Prevention:** Always strictly allowlist safe image formats (e.g., `image/jpeg`, `image/png`, `image/webp`) when configuring dropzones. Always apply explicit `maxLength` limits to any user input textareas and fields, particularly those feeding into AI generation pipelines.
