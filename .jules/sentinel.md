@@ -1,0 +1,4 @@
+## 2025-02-21 - [SVG XSS in Generic Image Uploads]
+**Vulnerability:** The application used a wildcard `image/*` to accept any image type for uploads. This exposes the app to Cross-Site Scripting (XSS) via maliciously crafted SVG files. Further, text input was lacking length limit constraints which opens the app to potential denial of service (DoS) attacks.
+**Learning:** Using generic wildcards in configurations like `react-dropzone` can unintentionally allow unsafe file types (like SVGs with embedded scripts). It's crucial to be explicit about the exact MIME types you intend to process. Additionally, all text inputs should have hard limits to prevent performance issues.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on wildcards. Ensure text inputs have `maxLength` attributes to cap input size.
