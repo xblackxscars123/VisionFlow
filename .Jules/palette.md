@@ -1,0 +1,3 @@
+## 2024-05-18 - Keyboard Accessibility for Hover-Revealed Actions
+**Learning:** In Tailwind, when hiding interactive elements behind a `group-hover:opacity-100` class on a parent container, keyboard-only users cannot access them because the elements remain visually hidden (opacity 0) when they receive focus. Using `group-focus-within:opacity-100` alongside `group-hover` ensures the parent container reveals the actions when an inner element is focused. Also, icon-only download buttons need `aria-label`s for screen readers.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on parent containers containing interactive children, and ensure all icon-only buttons have descriptive `aria-label` attributes.
