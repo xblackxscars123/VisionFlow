@@ -1,0 +1,3 @@
+## 2024-03-20 - Adding Keyboard Focus Support to Hover-Revealed Elements
+**Learning:** In Tailwind CSS, using `group-hover` to reveal interactive elements (like the image download button overlay in `App.tsx`) hides the elements from keyboard-only users because the parent container isn't hovered. The interactive elements inside remain hidden but tab-focusable, leading to an invisible focused element.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container. This ensures that when a keyboard user tabs to an interactive child element inside the hidden container, the container correctly reveals itself, providing a visible interaction state.
