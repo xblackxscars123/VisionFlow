@@ -1,0 +1,4 @@
+## 2024-05-15 - Unrestricted File Upload and Missing DoS Limits
+**Vulnerability:** The `react-dropzone` configuration used a generic `image/*` wildcard, which allows uploading potentially malicious SVG files that can execute JavaScript (XSS). Additionally, the prompt textarea lacked a `maxLength` attribute, making the application susceptible to resource exhaustion or DoS attacks via excessively large inputs.
+**Learning:** Generic MIME type wildcards are dangerous, especially for image uploads, as browsers can interpret SVGs as executable scripts. Unbounded text inputs can lead to performance degradation or API abuse.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on generic wildcards. Always enforce sensible `maxLength` limits on text inputs to prevent resource exhaustion and API abuse.
