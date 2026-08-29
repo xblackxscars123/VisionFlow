@@ -1,0 +1,4 @@
+## 2024-05-24 - [SVG XSS in React Dropzone & Textarea DoS]
+**Vulnerability:** The application was vulnerable to XSS via SVG file uploads because the `react-dropzone` was configured with a generic `image/*` MIME type wildcard, allowing execution of embedded JavaScript within SVG images. Additionally, the prompt generation `<textarea>` lacked a length limit, posing a Denial of Service (DoS) risk from excessively long inputs.
+**Learning:** Generic wildcard MIME types like `image/*` in file upload handlers are insecure because browsers can execute embedded scripts inside certain image formats like `.svg`. Text inputs without limits can be abused to degrade application performance or exhaust resources.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on wildcards in file upload handlers. Always apply `maxLength` attributes to text inputs to enforce sane boundaries on user-provided data.
