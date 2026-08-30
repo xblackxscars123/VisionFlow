@@ -356,7 +356,7 @@ export default function App() {
               {/* Upload Input */}
               <div 
                 {...getRootProps()} 
-                className={`p-8 rounded-3xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
+                className={`group focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:outline-none p-8 rounded-3xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center text-center ${
                   isDragActive ? 'border-orange-500 bg-orange-500/5' : 'border-white/10 bg-white/5 hover:bg-white/10'
                 }`}
               >
@@ -364,7 +364,7 @@ export default function App() {
                 {images.original ? (
                   <div className="relative w-full aspect-square rounded-xl overflow-hidden">
                     <img src={images.original} alt="Original" className="w-full h-full object-cover" />
-                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                    <div className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity">
                       <p className="text-sm font-medium">Click to replace</p>
                     </div>
                   </div>
@@ -435,10 +435,11 @@ export default function App() {
                       alt="Final" 
                       className="w-full h-full object-contain p-8"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
                         onClick={downloadImage}
-                        className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download optimized image"
+                        className="p-4 rounded-full bg-white text-black hover:scale-110 focus-visible:scale-110 focus-visible:ring-4 focus-visible:ring-orange-500 focus-visible:outline-none transition-transform"
                       >
                         <Download className="w-6 h-6" />
                       </button>
