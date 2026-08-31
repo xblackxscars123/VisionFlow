@@ -1,0 +1,4 @@
+## 2025-02-28 - Input Security Deficiencies
+**Vulnerability:** The `react-dropzone` implementation accepted a generic `image/*` wildcard, which includes potentially malicious MIME types like `image/svg+xml` (SVG XSS risk). Also, a `textarea` for user input lacked any `maxLength` constraint, leading to a possible DoS vector from excessively large payloads.
+**Learning:** React component libraries often default to trusting the browser's type resolution, and generic wildcards in file uploads are risky because some types (like SVGs) can execute scripts. Lack of character limits on text inputs is a common oversight that degrades performance when handling giant strings.
+**Prevention:** Always explicitly allowlist strictly safe file extensions/MIMEs (e.g., `image/jpeg`, `image/png`, `image/webp`) in dropzones. Always add a reasonable `maxLength` bound on text inputs.
