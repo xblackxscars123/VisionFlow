@@ -1,0 +1,4 @@
+## 2025-02-27 - [Fix XSS in File Uploads and DoS in Text Inputs]
+**Vulnerability:** SVG-based XSS via wildcard MIME types (`image/*`) in `react-dropzone` and potential DoS via unbounded text inputs.
+**Learning:** Generic MIME type wildcards like `image/*` can inadvertently allow malicious SVG files containing executable scripts to bypass basic file upload validations, leading to XSS vulnerabilities. Additionally, missing length limits on text inputs can allow excessively large payloads, leading to performance degradation and DoS risks.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) instead of relying on wildcards. Consistently implement strict input length constraints (e.g., `maxLength={1000}`) on all text inputs to mitigate resource exhaustion attacks.
