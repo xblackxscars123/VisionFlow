@@ -1,0 +1,3 @@
+## 2024-05-24 - Interactive Elements Hidden by Hover State
+**Learning:** Found an icon-only download button inside a container that used `group-hover:opacity-100` to reveal it. Because it was missing `group-focus-within:opacity-100`, the button became invisible during keyboard navigation. Also, the icon-only button had no ARIA label or title, making it opaque to screen readers.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container when revealing interactive elements. Always provide `aria-label` and `title` to icon-only buttons for accessibility.
