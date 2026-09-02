@@ -1,0 +1,3 @@
+## 2024-05-24 - Group Hover Accessibility Pattern
+**Learning:** Using `group-hover:opacity-100` to reveal interactive elements (like the download button on the Final Image card) creates an accessibility issue where the button becomes invisible and potentially unreachable or confusing for keyboard users who navigate via Tab instead of a mouse pointer.
+**Action:** Always pair `group-hover:opacity-[value]` with `group-focus-within:opacity-[value]` on the parent container, and ensure the interactive children have proper `focus-visible` styles to guarantee they remain visible and accessible via keyboard navigation.
