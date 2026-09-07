@@ -1,0 +1,4 @@
+## 2024-03-05 - File Upload Allowlist XSS and Unbounded Textarea DoS
+**Vulnerability:** The `react-dropzone` input allowed all image types `image/*`, which includes `image/svg+xml`. SVG files can contain embedded JavaScript, leading to Cross-Site Scripting (XSS) if served or processed insecurely. The prompt textarea lacked a `maxLength`, allowing unbounded input which can lead to Denial of Service (DoS) during application rendering or API processing.
+**Learning:** Generic wildcards like `image/*` are dangerous because they include executable image formats like SVGs. UI text inputs without size constraints open up vectors for resource exhaustion.
+**Prevention:** Always explicitly allowlist safe MIME types (e.g., `image/jpeg`, `image/png`, `image/webp`) in file upload components. Always set a `maxLength` attribute on text inputs and textareas to enforce reasonable bounds.
