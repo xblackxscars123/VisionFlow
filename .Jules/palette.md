@@ -1,0 +1,3 @@
+## 2024-05-24 - Hidden Interactive Elements Accessibility Pattern
+**Learning:** When using Tailwind's hover states (like `group-hover:opacity-100`) to reveal interactive elements (e.g., buttons inside image overlays), relying solely on hover makes the elements invisible to keyboard users navigating via Tab, as focus doesn't trigger the parent's hover state.
+**Action:** Always pair `group-hover` opacity changes with `group-focus-within` on the parent container (e.g., `group-hover:opacity-100 group-focus-within:opacity-100`). This ensures that when a keyboard user tabs to the interactive element inside the container, the container becomes visible.
