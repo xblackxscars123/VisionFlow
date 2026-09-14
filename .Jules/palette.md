@@ -1,0 +1,3 @@
+## 2025-02-28 - Hover overlays block keyboard accessibility
+**Learning:** Using `group-hover:opacity-100` to hide interactive elements (like the image download button overlay) without an equivalent `focus-within` state makes those actions inaccessible to keyboard users, as tabbing to the hidden button won't trigger the hover state.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container when concealing interactive controls. Ensure the control itself has `focus:outline-none focus-visible:ring-2` to show clear focus state when it becomes visible.
