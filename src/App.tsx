@@ -435,10 +435,11 @@ export default function App() {
                       alt="Final" 
                       className="w-full h-full object-contain p-8"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
                         onClick={downloadImage}
-                        className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download optimized image"
+                        className="p-4 rounded-full bg-white text-black hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 transition-transform"
                       >
                         <Download className="w-6 h-6" />
                       </button>
