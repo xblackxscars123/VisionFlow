@@ -92,7 +92,8 @@ export default function App() {
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    // SECURITY: Explicitly allowlist safe MIME types to prevent SVG-based XSS attacks
+    accept: { 'image/jpeg': [], 'image/png': [], 'image/webp': [] },
     multiple: false 
   });
 
@@ -312,11 +313,13 @@ export default function App() {
                   <Zap className="w-5 h-5 text-orange-400" />
                   Generate from Prompt
                 </h2>
+                {/* SECURITY: Limit input length to prevent DoS */}
                 <textarea
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
+                  maxLength={1000}
                 />
                 <button
                   onClick={runPipeline}
