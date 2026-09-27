@@ -314,6 +314,7 @@ export default function App() {
                 </h2>
                 <textarea
                   value={prompt}
+                  aria-label="Image prompt description"
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
                   className="w-full h-32 bg-black/40 border border-white/10 rounded-2xl p-4 text-white placeholder:text-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500/50 transition-all resize-none mb-6"
@@ -435,10 +436,11 @@ export default function App() {
                       alt="Final" 
                       className="w-full h-full object-contain p-8"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
                         onClick={downloadImage}
-                        className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download optimized image"
+                        className="p-4 rounded-full bg-white text-black hover:scale-110 focus-visible:ring-2 focus-visible:ring-orange-500 outline-none transition-transform"
                       >
                         <Download className="w-6 h-6" />
                       </button>
