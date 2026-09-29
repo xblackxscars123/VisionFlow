@@ -1,0 +1,3 @@
+## 2024-05-24 - [Accessible Hover Interactions]
+**Learning:** When hiding interactive elements (like icon-only download buttons) behind a hover overlay using Tailwind (`group-hover:opacity-100`), keyboard users cannot access them because hovering is impossible.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the parent container so that when the child button receives focus via Tab, the overlay becomes visible. Additionally, ensure icon-only buttons always receive an `aria-label`.
