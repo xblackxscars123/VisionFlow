@@ -1,0 +1,3 @@
+## 2025-10-09 - Keyboard Accessible Image Overlays
+**Learning:** This application relies on Tailwind `group-hover:opacity-100` and `hover:opacity-100` to reveal interactive elements over images (like download buttons), which entirely hides these actions from keyboard-only users.
+**Action:** When using hover-revealed overlays, always pair them with `group-focus-within:opacity-100` on the parent container and add `focus-visible` states to the interactive children to ensure keyboard users can discover and use them.
