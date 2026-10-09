@@ -92,7 +92,8 @@ export default function App() {
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    // SECURITY: Prevent XSS by explicitly allowlisting safe image MIME types
+    accept: { 'image/jpeg': [], 'image/png': [], 'image/webp': [] },
     multiple: false 
   });
 
