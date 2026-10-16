@@ -1,0 +1,3 @@
+## 2024-10-16 - Tailwind Overlay Accessibility Pattern
+**Learning:** In this app's image overlay components, using `group-hover:opacity-100` without `group-focus-within:opacity-100` hides interactive elements (like the download button) from keyboard users.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on the container to ensure overlays appear during keyboard navigation.
