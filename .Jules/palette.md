@@ -1,0 +1,3 @@
+## 2024-10-18 - Ensure keyboard access for hover-revealed elements
+**Learning:** Elements hidden until hover become completely inaccessible to keyboard-only and screen reader users if they aren't also triggered by focus within the container. Additionally, icon-only buttons in these overlays often lack accessible names.
+**Action:** Always pair `group-hover:opacity-100` with `group-focus-within:opacity-100` on overlay containers, and ensure icon-only buttons have an `aria-label` and visible focus states.
