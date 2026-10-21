@@ -90,9 +90,14 @@ export default function App() {
   };
 
   // @ts-ignore - Type mismatch in environment
+  // Security: explicitly allowlist safe image formats to prevent XSS via SVG/HTML uploads
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': []
+    },
     multiple: false 
   });
 
