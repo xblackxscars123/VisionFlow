@@ -437,6 +437,7 @@ export default function App() {
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
+                        aria-label="Download image"
                         onClick={downloadImage}
                         className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
                       >
