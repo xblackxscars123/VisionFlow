@@ -92,7 +92,12 @@ export default function App() {
   // @ts-ignore - Type mismatch in environment
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ 
     onDrop, 
-    accept: { 'image/*': [] },
+    accept: {
+      'image/jpeg': [],
+      'image/png': [],
+      'image/webp': []
+    },
+    maxSize: 5242880,
     multiple: false 
   });
 
