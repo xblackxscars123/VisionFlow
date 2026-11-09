@@ -439,6 +439,7 @@ export default function App() {
                       <button 
                         onClick={downloadImage}
                         className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
+                        aria-label="Download image"
                       >
                         <Download className="w-6 h-6" />
                       </button>
