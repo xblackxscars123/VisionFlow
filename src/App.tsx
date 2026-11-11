@@ -195,7 +195,7 @@ export default function App() {
         origin: { y: 0.6 }
       });
     } catch (err: any) {
-      console.error(err);
+      console.error('Operation failed', err);
       const errorMessage = err.message || "An error occurred during processing";
       
       // If we get a 403 or "not found" error, it might be related to the API key
@@ -204,7 +204,8 @@ export default function App() {
         setUseFreeMode(false);
         setError("API key permission denied. You can switch to the Free Model or connect a paid key.");
       } else {
-        setError(errorMessage);
+        // Do not leak internal error details to the UI
+        setError("An error occurred during processing. Please try again.");
       }
       
       setStep('input');
