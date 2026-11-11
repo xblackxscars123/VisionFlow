@@ -313,6 +313,7 @@ export default function App() {
                   Generate from Prompt
                 </h2>
                 <textarea
+                  aria-label="Image prompt"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="Describe the image you want to find and process..."
@@ -360,7 +361,7 @@ export default function App() {
                   isDragActive ? 'border-orange-500 bg-orange-500/5' : 'border-white/10 bg-white/5 hover:bg-white/10'
                 }`}
               >
-                <input {...getInputProps()} />
+                <input {...getInputProps()} aria-label="File upload" />
                 {images.original ? (
                   <div className="relative w-full aspect-square rounded-xl overflow-hidden">
                     <img src={images.original} alt="Original" className="w-full h-full object-cover" />
@@ -437,6 +438,8 @@ export default function App() {
                     />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
                       <button 
+                        aria-label="Download image"
+                        title="Download image"
                         onClick={downloadImage}
                         className="p-4 rounded-full bg-white text-black hover:scale-110 transition-transform"
                       >
